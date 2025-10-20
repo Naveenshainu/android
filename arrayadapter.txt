@@ -1,0 +1,65 @@
+activity main.xml
+
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context=".MainActivity">
+
+    <ListView
+        android:id="@+id/listview"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent" />
+
+</LinearLayout>
+
+
+MainActivity.java
+
+package com.example.arrayadaptervishnu;
+
+import androidx.appcompat.app.AppCompatActivity;
+import android.os.Bundle;
+import android.widget.ArrayAdapter;
+import android.widget.ListView;
+import android.widget.Toast;
+
+public class MainActivity extends AppCompatActivity {
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_main);
+
+        ListView listview;
+
+        String[] person_qualify = {
+                "item1", "item2", "item3", "item4", "item5",
+                "item6", "item7", "item8", "item9", "item10",
+                "Item11", "Item12"
+        };
+
+        listview = findViewById(R.id.listview);
+
+        // Correct ArrayAdapter
+        ArrayAdapter<String> adapter = new ArrayAdapter<>(
+                getApplicationContext(),
+                android.R.layout.simple_expandable_list_item_1,
+                person_qualify
+        );
+
+        listview.setAdapter(adapter);
+
+        // Correct listener
+        listview.setOnItemClickListener((parent, view, position, id) -> {
+            Toast.makeText(
+                    this,
+                    "The selected item is " + person_qualify[position],
+                    Toast.LENGTH_SHORT
+            ).show();
+        });
+    }
+}
+
